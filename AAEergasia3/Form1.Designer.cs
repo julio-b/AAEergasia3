@@ -23,12 +23,32 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.components = new System.ComponentModel.Container();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.SuspendLayout();
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(54, 78);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(493, 279);
+            this.richTextBox1.TabIndex = 0;
+            this.richTextBox1.Text = "temp textbox.. display db rows\n.\n";
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(627, 421);
+            this.Controls.Add(this.richTextBox1);
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

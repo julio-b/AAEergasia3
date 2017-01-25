@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SQLite;
 using System.IO;
+using System.Runtime.InteropServices;
+using WMPLib;
+using System.Media;
 
 namespace AAEergasia3 {
     public partial class Form1 : Form {
@@ -48,26 +51,37 @@ namespace AAEergasia3 {
         }
 
         private void button1_Click(object sender, EventArgs e) {
-            /*
-            WMPLib.WindowsMediaPlayer wplayer = new WMPLib.WindowsMediaPlayer();
-            wplayer.URL = "..\\..\\SupeMario.mp3";
-            wplayer.settings.volume = 90;
-            wplayer.controls.play();
-            */
-            /*
-            System.Media.SoundPlayer mario = new System.Media.SoundPlayer(@"Super_Mario_Bros.wav");
-            mario.Play();
-            */
-
+            playSong("../../rickroll.mp3");
         }
 
         private void songsDataGridView_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
-            var songFile = songsDataGridView.Rows[e.RowIndex].Cells[6].Value;
-            if (File.Exists(songFile.ToString())) {
-                label1.Text = songFile.ToString();
-                System.Media.SoundPlayer test = new System.Media.SoundPlayer(songFile.ToString());
-                test.Play();
+            string songFile = songsDataGridView.Rows[e.RowIndex].Cells[6].Value.ToString();
+            if (File.Exists(songFile)) {
+                label1.Text = songFile;
+                playSong(songFile);
             } else label1.Text = "File not found";
         }
+
+        private void playSong(string filepath)
+        {
+            if (!File.Exists(filepath)) return;
+            if (filepath.EndsWith(".wav"))
+            {
+                SoundPlayer sound = new SoundPlayer(@filepath);
+                sound.Load();
+                sound.Play();
+            }
+            else if (filepath.EndsWith(".mp3"))
+            {
+                WindowsMediaPlayer wplayer = new WindowsMediaPlayer();
+                if (filepath.Contains(".."))
+                    wplayer.URL = new DirectoryInfo(@filepath).FullName;
+                else
+                    wplayer.URL = filepath;
+                wplayer.settings.volume = 90;
+                wplayer.controls.play();
+            }
+        }
+
     }
 }

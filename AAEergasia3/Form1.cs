@@ -14,7 +14,9 @@ using WMPLib;
 using System.Media;
 
 namespace AAEergasia3 {
+    
     public partial class Form1 : Form {
+        Song currSong = new Song();
         public Form1() {
             InitializeComponent();
             MusicLib m = new MusicLib();
@@ -51,17 +53,29 @@ namespace AAEergasia3 {
         }
 
         private void button1_Click(object sender, EventArgs e) {
-            playSong("../../rickroll.mp3");
+            if (button1.Text == "Play")
+            {
+                currSong.LoadSong("../../rickroll.mp3");
+                currSong.Play();
+                button1.Text = "Stop";
+            }
+            else
+            {
+                currSong.Stop();
+                button1.Text = "Play";
+            }
         }
 
         private void songsDataGridView_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
             string songFile = songsDataGridView.Rows[e.RowIndex].Cells[6].Value.ToString();
             if (File.Exists(songFile)) {
                 label1.Text = songFile;
-                playSong(songFile);
+                currSong.LoadSong(songFile);
+                currSong.Play();
+                button1.Text = "Stop";
             } else label1.Text = "File not found";
         }
-
+        /*
         private void playSong(string filepath)
         {
             if (!File.Exists(filepath)) return;
@@ -82,6 +96,7 @@ namespace AAEergasia3 {
                 wplayer.controls.play();
             }
         }
+        */
 
     }
 }

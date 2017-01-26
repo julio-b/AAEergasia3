@@ -17,15 +17,13 @@ namespace AAEergasia3 {
         MusicLib m = new MusicLib();
         WMPplayer w = new WMPplayer();
         int playing = -1;
+        bool edit_mode = false;
         public Form1() {
             InitializeComponent();
             
             /*
             m.InsertNewFile("aa.mp3", "AA", "aaaa", 1111, "A#", "dottt", 111111);
             m.InsertNewFile("bbb.bbb", "BBBB", "werbb", 22, "CCC", "c", 2);
-            m.InsertNewFile("musicwow22.mp3", "asqwqw N Or", "qwe", 2006, "Thrash Metal", "english", 230);
-            m.InsertNewFile("i333weqwe.mp3", "meee", "QWEr", 2006, "Thrash Metal", "english", 0);
-            m.InsertNewFile("memem-uouou.mp3", "ououou", "memem", 2016, "Thrash Metal", "english", 0);
             m.InsertNewFile("Mfofo - LSSDD.mp3", "LSSDD", "Mfofoo", 2046, "Thrash Metal", "english");
             m.InsertNewFile("HVTT.mp3", "Tor", "wqe", 20776, "Thrash Metal");
             m.InsertNewFile("Deletethis.mp3", "Tor", "wqe", 20776, "Thrash Metal");
@@ -47,11 +45,11 @@ namespace AAEergasia3 {
                 songsDataGridView.Columns[i].SortMode = DataGridViewColumnSortMode.Programmatic;
                 songsDataGridView.Columns[i].Name = r.GetName(i+1);
             }
-            reset_dataGridView();
+            refresh_dataGridView();
 
         }
 
-        private void reset_dataGridView() {
+        private void refresh_dataGridView() {
             songsDataGridView.Rows.Clear();
             SQLiteDataReader r = m.GetOrdered();
             while (r.Read()) {
@@ -59,25 +57,18 @@ namespace AAEergasia3 {
             }
         }
 
-        private void button1_Click(object sender, EventArgs e) {
-            //w.playSong("../../rickroll.mp3");
-            //label1.Text = w.wplayer.URL;
-            //reset_dataGridView();
-            /*thelei ftiaksimo...
+        private void playBtn_Click(object sender, EventArgs e) {
             if (w.wplayer.playState != WMPPlayState.wmppsPaused && w.wplayer.playState!=WMPPlayState.wmppsPlaying) {
                 songsDataGridView_CellMouseDoubleClick(null, null);
             }
-            */
             var b = sender as Button;
             b.Text = w.toggle();
         }
 
         private void songsDataGridView_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
-
             int ind = (e == null ? songsDataGridView.SelectedRows[0].Index : e.RowIndex);
             if (ind < 0) return;
             string songFile = songsDataGridView.Rows[ind].Cells[6].Value.ToString();
-            label1.Text += playing.ToString();
             if (File.Exists(songFile)) {
                 if (playing != -1) {
                     songsDataGridView.Rows[playing].DefaultCellStyle.ForeColor = Color.White;
@@ -113,13 +104,46 @@ namespace AAEergasia3 {
             }
         }
         */
-        private void button2_Click(object sender, EventArgs e) {
+        private void newSongBtn_Click(object sender, EventArgs e) {
             if (openFileDialog1.ShowDialog() == DialogResult.OK) {
                 foreach (var s in openFileDialog1.FileNames) {
-                    m.InsertNewFile(s, s, "--", 0, "--");
+                    m.InsertNewFile(s,new DirectoryInfo(s).Name, "--", 0, "--");
                 }
             }
-            reset_dataGridView();
+            refresh_dataGridView();
+        }
+
+        private void editModeBtn_Click(object sender, EventArgs e) {
+            var btn = sender as Button;
+            if (edit_mode) { 
+                songsDataGridView.CellClick -= songsDataGridView_CellClick;
+                btn.Font = Button.DefaultFont;
+                btn.ForeColor = Button.DefaultForeColor;
+            } else { 
+                songsDataGridView.CellClick += new DataGridViewCellEventHandler(songsDataGridView_CellClick);
+                btn.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+                btn.ForeColor = Color.DarkRed;
+            }
+            edit_mode = !edit_mode;
+        }
+
+        private void songsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e) {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+            songsDataGridView.BeginEdit(true);
+        }
+
+        private void songsDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e) {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+            m.EditFileInfos(songsDataGridView[6,e.RowIndex].Value.ToString(), songsDataGridView.Columns[e.ColumnIndex].Name, songsDataGridView[e.ColumnIndex, e.RowIndex].Value.ToString());
+        }
+
+        private void deleteSongBtn_Click(object sender, EventArgs e) {
+            if (songsDataGridView.SelectedRows.Count > 0 && 
+                MessageBox.Show("Delete \""+ songsDataGridView.SelectedRows[0].Cells[0].Value.ToString()+ "\" ?",
+                "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)==DialogResult.Yes) {
+                m.DeleteFile(songsDataGridView.SelectedRows[0].Cells[6].Value.ToString());//delete from sqlite
+                songsDataGridView.Rows.Remove(songsDataGridView.SelectedRows[0]);//delete from datagridview
+            }
         }
     }
     class WMPplayer {

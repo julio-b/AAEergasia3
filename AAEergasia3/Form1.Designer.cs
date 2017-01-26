@@ -28,9 +28,11 @@
             this.songsDataGridView = new System.Windows.Forms.DataGridView();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
+            this.deleteSongBtn = new System.Windows.Forms.Button();
+            this.editModeBtn = new System.Windows.Forms.Button();
+            this.newSongBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.playBtn = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.songsDataGridView)).BeginInit();
             this.panel1.SuspendLayout();
@@ -60,10 +62,10 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.songsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.songsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.songsDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.songsDataGridView.Location = new System.Drawing.Point(12, 37);
             this.songsDataGridView.MultiSelect = false;
             this.songsDataGridView.Name = "songsDataGridView";
-            this.songsDataGridView.ReadOnly = true;
             this.songsDataGridView.RowHeadersVisible = false;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.Teal;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -74,6 +76,7 @@
             this.songsDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.songsDataGridView.Size = new System.Drawing.Size(874, 480);
             this.songsDataGridView.TabIndex = 6;
+            this.songsDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.songsDataGridView_CellEndEdit);
             this.songsDataGridView.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.songsDataGridView_CellMouseDoubleClick);
             // 
             // menuStrip1
@@ -90,23 +93,45 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.panel1.Controls.Add(this.button2);
+            this.panel1.Controls.Add(this.deleteSongBtn);
+            this.panel1.Controls.Add(this.editModeBtn);
+            this.panel1.Controls.Add(this.newSongBtn);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.playBtn);
             this.panel1.Location = new System.Drawing.Point(0, 523);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(902, 61);
             this.panel1.TabIndex = 8;
             // 
-            // button2
+            // deleteSongBtn
             // 
-            this.button2.Location = new System.Drawing.Point(799, 15);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(87, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "AddNewSong";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.deleteSongBtn.Location = new System.Drawing.Point(566, 15);
+            this.deleteSongBtn.Name = "deleteSongBtn";
+            this.deleteSongBtn.Size = new System.Drawing.Size(75, 23);
+            this.deleteSongBtn.TabIndex = 5;
+            this.deleteSongBtn.Text = "DeleteSong";
+            this.deleteSongBtn.UseVisualStyleBackColor = true;
+            this.deleteSongBtn.Click += new System.EventHandler(this.deleteSongBtn_Click);
+            // 
+            // editModeBtn
+            // 
+            this.editModeBtn.Location = new System.Drawing.Point(684, 15);
+            this.editModeBtn.Name = "editModeBtn";
+            this.editModeBtn.Size = new System.Drawing.Size(75, 23);
+            this.editModeBtn.TabIndex = 4;
+            this.editModeBtn.Text = "EditMode";
+            this.editModeBtn.UseVisualStyleBackColor = true;
+            this.editModeBtn.Click += new System.EventHandler(this.editModeBtn_Click);
+            // 
+            // newSongBtn
+            // 
+            this.newSongBtn.Location = new System.Drawing.Point(799, 15);
+            this.newSongBtn.Name = "newSongBtn";
+            this.newSongBtn.Size = new System.Drawing.Size(87, 23);
+            this.newSongBtn.TabIndex = 2;
+            this.newSongBtn.Text = "AddNewSong";
+            this.newSongBtn.UseVisualStyleBackColor = true;
+            this.newSongBtn.Click += new System.EventHandler(this.newSongBtn_Click);
             // 
             // label1
             // 
@@ -117,19 +142,20 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "label1";
             // 
-            // button1
+            // playBtn
             // 
-            this.button1.Location = new System.Drawing.Point(411, 15);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Play";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.playBtn.Location = new System.Drawing.Point(411, 15);
+            this.playBtn.Name = "playBtn";
+            this.playBtn.Size = new System.Drawing.Size(75, 23);
+            this.playBtn.TabIndex = 0;
+            this.playBtn.Text = "Play";
+            this.playBtn.UseVisualStyleBackColor = true;
+            this.playBtn.Click += new System.EventHandler(this.playBtn_Click);
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Multiselect = true;
             // 
             // Form1
             // 
@@ -155,10 +181,12 @@
         private System.Windows.Forms.DataGridView songsDataGridView;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button playBtn;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button newSongBtn;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button editModeBtn;
+        private System.Windows.Forms.Button deleteSongBtn;
     }
 }
 

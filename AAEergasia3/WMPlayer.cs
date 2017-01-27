@@ -11,15 +11,18 @@ namespace AAEergasia3 {
         public WindowsMediaPlayer wplayer;
         public WMPlayer() {
             wplayer = new WindowsMediaPlayer();
+            wplayer.settings.autoStart = true;
+            wplayer.settings.volume = 100;
         }
 
         public void playSong(string filepath) {
+            wplayer.controls.stop();
             if (!File.Exists(filepath)) return;
             if (filepath.Contains(".."))
                 wplayer.URL = new DirectoryInfo(@filepath).FullName;
             else
                 wplayer.URL = filepath;
-            wplayer.settings.volume = 90;
+            
             wplayer.controls.play();
         }
 
@@ -30,12 +33,12 @@ namespace AAEergasia3 {
         public string toggle() {
             if (wplayer.playState == WMPPlayState.wmppsPlaying) {
                 wplayer.controls.pause();
-                return "Play";
-            } else {
+                return "\uf132";
+            } else if (wplayer.playState == WMPPlayState.wmppsPaused||wplayer.playState==WMPPlayState.wmppsReady) {
                 wplayer.controls.play();
-                return "Pause";
+                return "\uf130";
             }
-
+            return "\uf132";
         }
     }
 }

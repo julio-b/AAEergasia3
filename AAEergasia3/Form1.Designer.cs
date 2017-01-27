@@ -23,11 +23,16 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
             this.songsDataGridView = new System.Windows.Forms.DataGridView();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.volumeBtn = new System.Windows.Forms.Button();
+            this.repeatBtn = new System.Windows.Forms.Button();
+            this.randomBtn = new System.Windows.Forms.Button();
+            this.prevBtn = new System.Windows.Forms.Button();
+            this.nextBtn = new System.Windows.Forms.Button();
             this.editModeBtn = new System.Windows.Forms.Button();
             this.newSongBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -51,14 +56,14 @@
             this.songsDataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.songsDataGridView.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.songsDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(130)))), ((int)(((byte)(130)))));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.songsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle37.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            dataGridViewCellStyle37.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle37.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(160)))));
+            dataGridViewCellStyle37.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            dataGridViewCellStyle37.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle37.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.songsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle37;
             this.songsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.songsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.songsDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -67,12 +72,12 @@
             this.songsDataGridView.MultiSelect = false;
             this.songsDataGridView.Name = "songsDataGridView";
             this.songsDataGridView.RowHeadersVisible = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            this.songsDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle38.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            dataGridViewCellStyle38.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle38.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle38.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle38.SelectionForeColor = System.Drawing.Color.White;
+            this.songsDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle38;
             this.songsDataGridView.RowTemplate.Height = 40;
             this.songsDataGridView.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.songsDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -96,6 +101,11 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.panel1.Controls.Add(this.volumeBtn);
+            this.panel1.Controls.Add(this.repeatBtn);
+            this.panel1.Controls.Add(this.randomBtn);
+            this.panel1.Controls.Add(this.prevBtn);
+            this.panel1.Controls.Add(this.nextBtn);
             this.panel1.Controls.Add(this.editModeBtn);
             this.panel1.Controls.Add(this.newSongBtn);
             this.panel1.Controls.Add(this.label1);
@@ -105,29 +115,107 @@
             this.panel1.Size = new System.Drawing.Size(902, 61);
             this.panel1.TabIndex = 8;
             // 
+            // volumeBtn
+            // 
+            this.volumeBtn.FlatAppearance.BorderSize = 0;
+            this.volumeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.volumeBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(160)))));
+            this.volumeBtn.Location = new System.Drawing.Point(589, 13);
+            this.volumeBtn.Name = "volumeBtn";
+            this.volumeBtn.Size = new System.Drawing.Size(60, 35);
+            this.volumeBtn.TabIndex = 9;
+            this.volumeBtn.Text = "";
+            this.volumeBtn.UseVisualStyleBackColor = true;
+            this.volumeBtn.Click += new System.EventHandler(this.volumeBtn_Click);
+            // 
+            // repeatBtn
+            // 
+            this.repeatBtn.FlatAppearance.BorderSize = 0;
+            this.repeatBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.repeatBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(160)))));
+            this.repeatBtn.Location = new System.Drawing.Point(180, 13);
+            this.repeatBtn.Name = "repeatBtn";
+            this.repeatBtn.Size = new System.Drawing.Size(60, 35);
+            this.repeatBtn.TabIndex = 8;
+            this.repeatBtn.Text = "";
+            this.repeatBtn.UseVisualStyleBackColor = true;
+            this.repeatBtn.MouseEnter += new System.EventHandler(this.controls_MouseEnter);
+            this.repeatBtn.MouseLeave += new System.EventHandler(this.controls_MouseLeave);
+            // 
+            // randomBtn
+            // 
+            this.randomBtn.FlatAppearance.BorderSize = 0;
+            this.randomBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.randomBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(160)))));
+            this.randomBtn.Location = new System.Drawing.Point(246, 13);
+            this.randomBtn.Name = "randomBtn";
+            this.randomBtn.Size = new System.Drawing.Size(60, 35);
+            this.randomBtn.TabIndex = 7;
+            this.randomBtn.Text = "";
+            this.randomBtn.UseVisualStyleBackColor = true;
+            this.randomBtn.MouseEnter += new System.EventHandler(this.controls_MouseEnter);
+            this.randomBtn.MouseLeave += new System.EventHandler(this.controls_MouseLeave);
+            // 
+            // prevBtn
+            // 
+            this.prevBtn.FlatAppearance.BorderSize = 0;
+            this.prevBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.prevBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(160)))));
+            this.prevBtn.Location = new System.Drawing.Point(345, 13);
+            this.prevBtn.Name = "prevBtn";
+            this.prevBtn.Size = new System.Drawing.Size(60, 35);
+            this.prevBtn.TabIndex = 6;
+            this.prevBtn.Text = "";
+            this.prevBtn.UseVisualStyleBackColor = true;
+            this.prevBtn.Click += new System.EventHandler(this.prevBtn_Click);
+            this.prevBtn.MouseEnter += new System.EventHandler(this.controls_MouseEnter);
+            this.prevBtn.MouseLeave += new System.EventHandler(this.controls_MouseLeave);
+            // 
+            // nextBtn
+            // 
+            this.nextBtn.FlatAppearance.BorderSize = 0;
+            this.nextBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.nextBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(160)))));
+            this.nextBtn.Location = new System.Drawing.Point(488, 13);
+            this.nextBtn.Name = "nextBtn";
+            this.nextBtn.Size = new System.Drawing.Size(60, 35);
+            this.nextBtn.TabIndex = 5;
+            this.nextBtn.Text = "";
+            this.nextBtn.UseVisualStyleBackColor = true;
+            this.nextBtn.Click += new System.EventHandler(this.nextBtn_Click);
+            this.nextBtn.MouseEnter += new System.EventHandler(this.controls_MouseEnter);
+            this.nextBtn.MouseLeave += new System.EventHandler(this.controls_MouseLeave);
+            // 
             // editModeBtn
             // 
-            this.editModeBtn.Location = new System.Drawing.Point(607, 15);
+            this.editModeBtn.FlatAppearance.BorderSize = 0;
+            this.editModeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.editModeBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(160)))));
+            this.editModeBtn.Location = new System.Drawing.Point(699, 13);
             this.editModeBtn.Name = "editModeBtn";
-            this.editModeBtn.Size = new System.Drawing.Size(75, 23);
+            this.editModeBtn.Size = new System.Drawing.Size(70, 40);
             this.editModeBtn.TabIndex = 4;
-            this.editModeBtn.Text = "EditMode";
+            this.editModeBtn.Text = "";
             this.editModeBtn.UseVisualStyleBackColor = true;
             this.editModeBtn.Click += new System.EventHandler(this.editModeBtn_Click);
             // 
             // newSongBtn
             // 
-            this.newSongBtn.Location = new System.Drawing.Point(688, 15);
+            this.newSongBtn.FlatAppearance.BorderSize = 0;
+            this.newSongBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.newSongBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(160)))));
+            this.newSongBtn.Location = new System.Drawing.Point(780, 13);
             this.newSongBtn.Name = "newSongBtn";
-            this.newSongBtn.Size = new System.Drawing.Size(87, 23);
+            this.newSongBtn.Size = new System.Drawing.Size(70, 40);
             this.newSongBtn.TabIndex = 2;
-            this.newSongBtn.Text = "AddNewSong";
+            this.newSongBtn.Text = "";
             this.newSongBtn.UseVisualStyleBackColor = true;
             this.newSongBtn.Click += new System.EventHandler(this.newSongBtn_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(42, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
@@ -136,13 +224,18 @@
             // 
             // playBtn
             // 
-            this.playBtn.Location = new System.Drawing.Point(411, 15);
+            this.playBtn.FlatAppearance.BorderSize = 0;
+            this.playBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.playBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(160)))));
+            this.playBtn.Location = new System.Drawing.Point(411, 3);
             this.playBtn.Name = "playBtn";
-            this.playBtn.Size = new System.Drawing.Size(75, 23);
+            this.playBtn.Size = new System.Drawing.Size(71, 55);
             this.playBtn.TabIndex = 0;
-            this.playBtn.Text = "Play";
+            this.playBtn.Text = "";
             this.playBtn.UseVisualStyleBackColor = true;
             this.playBtn.Click += new System.EventHandler(this.playBtn_Click);
+            this.playBtn.MouseEnter += new System.EventHandler(this.controls_MouseEnter);
+            this.playBtn.MouseLeave += new System.EventHandler(this.controls_MouseLeave);
             // 
             // openFileDialog1
             // 
@@ -193,6 +286,11 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button editModeBtn;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button repeatBtn;
+        private System.Windows.Forms.Button randomBtn;
+        private System.Windows.Forms.Button prevBtn;
+        private System.Windows.Forms.Button nextBtn;
+        private System.Windows.Forms.Button volumeBtn;
     }
 }
 

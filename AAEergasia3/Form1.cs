@@ -75,13 +75,17 @@ namespace AAEergasia3 {
                 if (playing != -1) {//reset previous row colors
                     songsDataGridView.Rows[playing].DefaultCellStyle.ForeColor = Color.White;
                     songsDataGridView.Rows[playing].DefaultCellStyle.SelectionForeColor = Color.White;
+                    songsDataGridView.Rows[playing].DefaultCellStyle.BackColor = Color.FromArgb(24, 24, 24);
                 }
                 playing = ind;
                 label1.Text = songFile;
                 w.playSong(songFile);
-                songsDataGridView.Rows[playing].DefaultCellStyle.ForeColor = Color.Yellow;
-                songsDataGridView.Rows[playing].DefaultCellStyle.SelectionForeColor = Color.Yellow;
+                songsDataGridView.Rows[playing].DefaultCellStyle.ForeColor = Color.FromArgb(29, 185, 84);//Color.Yellow;
+                songsDataGridView.Rows[playing].DefaultCellStyle.SelectionForeColor = Color.FromArgb(29, 185, 84); //Color.Yellow;
+                songsDataGridView.Rows[playing].DefaultCellStyle.BackColor = Color.FromArgb(51, 51, 51);
+
             } else label1.Text = "File not found";
+
         }
 
         private void newSongBtn_Click(object sender, EventArgs e) {
@@ -126,6 +130,11 @@ namespace AAEergasia3 {
             m.EditFileInfos(songsDataGridView[7,e.RowIndex].Value.ToString(), songsDataGridView.Columns[e.ColumnIndex].Name, songsDataGridView[e.ColumnIndex, e.RowIndex].Value.ToString());
         }
 
+        private void songsDataGridView_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e) {
+            if (e.RowIndex < 0) return;
+            songsDataGridView.Rows[e.RowIndex].Selected = true;
+
+        }
     }
  
 }

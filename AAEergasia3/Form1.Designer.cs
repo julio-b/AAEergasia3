@@ -23,12 +23,11 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.songsDataGridView = new System.Windows.Forms.DataGridView();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.deleteSongBtn = new System.Windows.Forms.Button();
             this.editModeBtn = new System.Windows.Forms.Button();
             this.newSongBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -53,26 +52,28 @@
             this.songsDataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.songsDataGridView.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.songsDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.DarkSlateGray;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.songsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.DarkSlateGray;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.songsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.songsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.songsDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.songsDataGridView.Location = new System.Drawing.Point(12, 37);
             this.songsDataGridView.MultiSelect = false;
             this.songsDataGridView.Name = "songsDataGridView";
             this.songsDataGridView.RowHeadersVisible = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            this.songsDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White;
+            this.songsDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            this.songsDataGridView.RowTemplate.Height = 40;
+            this.songsDataGridView.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.songsDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.songsDataGridView.Size = new System.Drawing.Size(874, 480);
             this.songsDataGridView.TabIndex = 6;
@@ -93,7 +94,6 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.panel1.Controls.Add(this.deleteSongBtn);
             this.panel1.Controls.Add(this.editModeBtn);
             this.panel1.Controls.Add(this.newSongBtn);
             this.panel1.Controls.Add(this.label1);
@@ -103,19 +103,9 @@
             this.panel1.Size = new System.Drawing.Size(902, 61);
             this.panel1.TabIndex = 8;
             // 
-            // deleteSongBtn
-            // 
-            this.deleteSongBtn.Location = new System.Drawing.Point(566, 15);
-            this.deleteSongBtn.Name = "deleteSongBtn";
-            this.deleteSongBtn.Size = new System.Drawing.Size(75, 23);
-            this.deleteSongBtn.TabIndex = 5;
-            this.deleteSongBtn.Text = "DeleteSong";
-            this.deleteSongBtn.UseVisualStyleBackColor = true;
-            this.deleteSongBtn.Click += new System.EventHandler(this.deleteSongBtn_Click);
-            // 
             // editModeBtn
             // 
-            this.editModeBtn.Location = new System.Drawing.Point(684, 15);
+            this.editModeBtn.Location = new System.Drawing.Point(607, 15);
             this.editModeBtn.Name = "editModeBtn";
             this.editModeBtn.Size = new System.Drawing.Size(75, 23);
             this.editModeBtn.TabIndex = 4;
@@ -125,7 +115,7 @@
             // 
             // newSongBtn
             // 
-            this.newSongBtn.Location = new System.Drawing.Point(799, 15);
+            this.newSongBtn.Location = new System.Drawing.Point(688, 15);
             this.newSongBtn.Name = "newSongBtn";
             this.newSongBtn.Size = new System.Drawing.Size(87, 23);
             this.newSongBtn.TabIndex = 2;
@@ -186,7 +176,6 @@
         private System.Windows.Forms.Button newSongBtn;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button editModeBtn;
-        private System.Windows.Forms.Button deleteSongBtn;
     }
 }
 

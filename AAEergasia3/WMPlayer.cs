@@ -16,14 +16,14 @@ namespace AAEergasia3 {
         }
 
         public void playSong(string filepath) {
-            wplayer.controls.stop();
             if (!File.Exists(filepath)) return;
+            wplayer.settings.autoStart = true;
             if (filepath.Contains(".."))
                 wplayer.URL = new DirectoryInfo(@filepath).FullName;
             else
                 wplayer.URL = filepath;
-            
             wplayer.controls.play();
+
         }
 
         public void pauseSong() {

@@ -18,8 +18,10 @@ namespace AAEergasia3 {
         MusicLib m = new MusicLib();
         WMPlayer w = new WMPlayer();
         PrivateFontCollection modernFont = new PrivateFontCollection();
-        int[] random = null;
+        int[] rand = null;
         bool repeat = false;
+        bool random = false;
+        int rind = 0;
         Font spoticon;
         int playing = -1;
         bool edit_mode = false;
@@ -32,6 +34,8 @@ namespace AAEergasia3 {
             spoticon = new Font(modernFont.Families[1], 16);
             nextBtn.Font = spoticon;prevBtn.Font = spoticon;repeatBtn.Font = spoticon;randomBtn.Font = spoticon;volumeBtn.Font = spoticon;/////         
             editModeBtn.Font = spoticon;newSongBtn.Font = spoticon;
+            playingSongLabel.Font = new Font(modernFont.Families[0], 11);
+            playingAuthorLabel.Font = new Font(modernFont.Families[0], 9);
 
             songsDataGridView.RowsDefaultCellStyle.Font = new Font(modernFont.Families[0], 13);
             songsDataGridView.ColumnHeadersDefaultCellStyle.Font = new Font(modernFont.Families[0], 12);
@@ -60,8 +64,6 @@ namespace AAEergasia3 {
             songsDataGridView.Columns[8].Visible = false;//hide filename column
 
             refresh_dataGridView();
-
-
         }
 
 
@@ -87,13 +89,14 @@ namespace AAEergasia3 {
                 }
                 //play new song
                 playing = ind;
-                label1.Text = songFile;
+                playingSongLabel.Text = songsDataGridView[2, ind].Value.ToString();
+                playingAuthorLabel.Text = songsDataGridView[3, ind].Value.ToString();
                 w.playSong(songFile);
                 songsDataGridView.Rows[playing].DefaultCellStyle.ForeColor = Color.FromArgb(29, 185, 84);
                 songsDataGridView.Rows[playing].DefaultCellStyle.SelectionForeColor = Color.FromArgb(29, 185, 84);
                 songsDataGridView.Rows[playing].DefaultCellStyle.BackColor = Color.FromArgb(51, 51, 51);
                 playBtn.Text = "\uf130";
-            } else label1.Text = "File not found";
+            } else playingSongLabel.Text = "File not found";
 
         }
 
@@ -133,14 +136,13 @@ namespace AAEergasia3 {
 
         private void songsDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e) {
             if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
-            if (songsDataGridView[e.ColumnIndex, e.RowIndex].Value.ToString() == "") { songsDataGridView.CancelEdit(); return; }
+            if (songsDataGridView[e.ColumnIndex, e.RowIndex].Value==null||songsDataGridView[e.ColumnIndex, e.RowIndex].Value.ToString() == "") { songsDataGridView.CancelEdit(); return; }
             m.EditFileInfos(songsDataGridView[8,e.RowIndex].Value.ToString(), songsDataGridView.Columns[e.ColumnIndex].Name, songsDataGridView[e.ColumnIndex, e.RowIndex].Value.ToString());
         }
 
         private void songsDataGridView_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e) {
             if (e.RowIndex < 0) return;
             songsDataGridView.Rows[e.RowIndex].Selected = true;
-
         }
 
         private void playBtn_Click(object sender, EventArgs e) {
@@ -148,11 +150,15 @@ namespace AAEergasia3 {
             (sender as Button).Text = w.toggle();
         }
         private void controls_MouseEnter(object sender, EventArgs e) {
-            (sender as Button).ForeColor = Color.White;
+            var b = sender as Button;
+            if((b==repeatBtn && repeat)||(b==randomBtn&&random)) { return; }
+            b.ForeColor = Color.White;
         }
 
         private void controls_MouseLeave(object sender, EventArgs e) {
-            (sender as Button).ForeColor = Color.FromArgb(160, 160, 160);
+            var b = sender as Button;
+            if ((b == repeatBtn && repeat)||(b==randomBtn&&random)) { return; }
+            b.ForeColor = Color.FromArgb(160, 160, 160);
         }
 
         private void volumeBtn_Click(object sender, EventArgs e) {
@@ -160,19 +166,55 @@ namespace AAEergasia3 {
         }
 
         private void prevBtn_Click(object sender, EventArgs e) {
-            int prev = playing <= 0 ? songsDataGridView.Rows.Count - 1 : playing - 1;
-            songsDataGridView.Rows[prev].Selected = true;
+            int prev=0;
+            if (random) {
+                rind = rind <= 0 ? songsDataGridView.RowCount-1 : rind - 1;
+            } else {
+                prev = playing <= 0 ? songsDataGridView.RowCount-1 : playing - 1;
+            }
+            songsDataGridView.Rows[repeat? playing : random ? rand[rind] : prev].Selected = true;
             songsDataGridView_CellMouseDoubleClick(null, null);
         }
 
         private void nextBtn_Click(object sender, EventArgs e) {
-            int next = playing >= songsDataGridView.Rows.Count-1 ? 0 : playing+1;
-            songsDataGridView.Rows[next].Selected = true;
+            int next=0;
+            if (random) {
+                rind = rind >= songsDataGridView.RowCount - 1 ? 0 : rind + 1;
+            } else {
+                next = playing >= songsDataGridView.Rows.Count - 1 ? 0 : playing + 1;
+            }
+            
+            songsDataGridView.Rows[repeat? playing : random ? rand[rind] : next].Selected = true;
             songsDataGridView_CellMouseDoubleClick(null, null);
         }
 
-        private void button1_Click(object sender, EventArgs e) {
-            label1.Text = w.wplayer.playState.ToString();
+        private void timer1_Tick(object sender, EventArgs e) {
+            var ee = w.wplayer.playState;
+            if (ee ==WMPPlayState.wmppsStopped) { nextBtn_Click(null, null); }
+            if (ee == WMPPlayState.wmppsReady) { w.wplayer.controls.play(); }
+        }
+
+        private void repeatBtn_Click(object sender, EventArgs e) {
+            repeat = !repeat;
+            (sender as Button).ForeColor = repeat ? Color.FromArgb(29, 185, 84) : Color.FromArgb(160, 160, 160);
+        }
+
+        private void randomBtn_Click(object sender, EventArgs e) {
+            random = !random;
+            (sender as Button).ForeColor = random ? Color.FromArgb(29, 185, 84) : Color.FromArgb(160, 160, 160);
+            Random r = new Random();
+            rand = new int[songsDataGridView.RowCount];
+            rind = 0;
+            for (int i = 0; i < songsDataGridView.RowCount; i++) rand[i] = i;
+            for(int i=0; i < songsDataGridView.RowCount; i++) {
+                int j = r.Next(i, songsDataGridView.RowCount);
+                int tmp = rand[j];
+                rand[j] = rand[i];
+                rand[i] = tmp;
+            }
+            int c = Array.IndexOf(rand, playing); 
+            rand[c] = rand[0];
+            rand[0] = playing;
         }
     }
 

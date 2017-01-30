@@ -30,18 +30,19 @@ namespace AAEergasia3 {
             modernFont.AddFontFile("..\\..\\Externals\\spoticon.ttf");
             modernFont.AddFontFile("..\\..\\Externals\\proxima_nova_regular_1.ttf");
             
-            playBtn.Font = new Font(modernFont.Families[1], 29);
+            playBtn.Font = new Font(modernFont.Families[1], 30);
             spoticon = new Font(modernFont.Families[1], 16);
-            nextBtn.Font = spoticon;prevBtn.Font = spoticon;repeatBtn.Font = spoticon;randomBtn.Font = spoticon;volumeBtn.Font = spoticon;/////         
+            nextBtn.Font = spoticon;prevBtn.Font = spoticon;repeatBtn.Font = spoticon;randomBtn.Font = spoticon;volumeBtn.Font = spoticon;
             editModeBtn.Font = spoticon;newSongBtn.Font = spoticon;
             playingSongLabel.Font = new Font(modernFont.Families[0], 11);
             playingAuthorLabel.Font = new Font(modernFont.Families[0], 9);
-
-            songsDataGridView.RowsDefaultCellStyle.Font = new Font(modernFont.Families[0], 13);
-            songsDataGridView.ColumnHeadersDefaultCellStyle.Font = new Font(modernFont.Families[0], 12);
+            
+            
+            songsDataGridView.RowsDefaultCellStyle.Font = new Font(modernFont.Families[0], 12);
+            songsDataGridView.ColumnHeadersDefaultCellStyle.Font = new Font(modernFont.Families[0], 10);
             songsDataGridView.EnableHeadersVisualStyles = false;
             songsDataGridView.ColumnCount = 9;
-            string[] tmp = { "#", "", "Name", "Author", "Year", "Genre", "Language", "Score", "filename"};
+            string[] tmp = { "#", "", "SONG", "ARTIST", "YEAR", "GENRE", "LANGUAGE", "SCORE", "filename"};
             for(int i = 0; i<tmp.Length; i++) {
                 songsDataGridView.Columns[i].SortMode = DataGridViewColumnSortMode.Programmatic;
                 songsDataGridView.Columns[i].Name = tmp[i].ToString();
@@ -62,16 +63,20 @@ namespace AAEergasia3 {
             songsDataGridView.Columns[7].Width = 60;
             songsDataGridView.Columns[7].ReadOnly = true;
             songsDataGridView.Columns[8].Visible = false;//hide filename column
+            //m.InsertNewFile("..\\..\\test\\System  Of A Down - Sad Statue.mp3", "-", "-", 0, "-");
 
             refresh_dataGridView();
         }
 
+        private void volumeCh(object sender, EventArgs e) {
+            w.wplayer.settings.volume = (sender as TrackBar).Value;
+        }
 
         private void refresh_dataGridView() { //sqlite db --> datagridview
             songsDataGridView.Rows.Clear();
             SQLiteDataReader r = m.GetOrdered();
             while (r.Read()) {
-                songsDataGridView.Rows.Add(new object[] { r.StepCount, "\uf160", r["name"], r["author"], r["year"], r["genre"], r["language"], r["score"], r["filename"]});
+                songsDataGridView.Rows.Add(new object[] { r.StepCount, "\uf160", r["song"], r["artist"], r["year"], r["genre"], r["language"], r["score"], r["filename"]});
                 songsDataGridView.Rows[r.StepCount - 1].Cells[1].Style.Font = spoticon;
                 songsDataGridView.Rows[r.StepCount - 1].Cells[1].Style.SelectionForeColor = Color.DarkRed;
             }
@@ -96,6 +101,9 @@ namespace AAEergasia3 {
                 songsDataGridView.Rows[playing].DefaultCellStyle.SelectionForeColor = Color.FromArgb(29, 185, 84);
                 songsDataGridView.Rows[playing].DefaultCellStyle.BackColor = Color.FromArgb(51, 51, 51);
                 playBtn.Text = "\uf130";
+                int tt = Int32.Parse(songsDataGridView[7, ind].Value.ToString()) + 1; 
+                m.EditFileInfos(songsDataGridView[8, ind].Value.ToString(), "score", tt);
+                songsDataGridView[7, ind].Value = tt;
             } else playingSongLabel.Text = "File not found";
 
         }
@@ -151,18 +159,20 @@ namespace AAEergasia3 {
         }
         private void controls_MouseEnter(object sender, EventArgs e) {
             var b = sender as Button;
-            if((b==repeatBtn && repeat)||(b==randomBtn&&random)) { return; }
+            if((b==repeatBtn && repeat)||(b==randomBtn&&random )|| (b == editModeBtn && edit_mode) || (b == volumeBtn && w.wplayer.settings.mute)) { return; }
             b.ForeColor = Color.White;
         }
 
         private void controls_MouseLeave(object sender, EventArgs e) {
             var b = sender as Button;
-            if ((b == repeatBtn && repeat)||(b==randomBtn&&random)) { return; }
+            if ((b == repeatBtn && repeat)||(b==randomBtn&&random)||(b==editModeBtn&&edit_mode)||(b==volumeBtn&&w.wplayer.settings.mute)) { return; }
             b.ForeColor = Color.FromArgb(160, 160, 160);
         }
 
         private void volumeBtn_Click(object sender, EventArgs e) {
-
+            w.wplayer.settings.mute = !w.wplayer.settings.mute;
+            (sender as Button).Text = w.wplayer.settings.mute ? "" : "";
+            (sender as Button).ForeColor = w.wplayer.settings.mute ? Color.DarkRed : Color.White;
         }
 
         private void prevBtn_Click(object sender, EventArgs e) {
@@ -172,7 +182,7 @@ namespace AAEergasia3 {
             } else {
                 prev = playing <= 0 ? songsDataGridView.RowCount-1 : playing - 1;
             }
-            songsDataGridView.Rows[repeat? playing : random ? rand[rind] : prev].Selected = true;
+            songsDataGridView.Rows[repeat&&sender==null? playing : random ? rand[rind] : prev].Selected = true;
             songsDataGridView_CellMouseDoubleClick(null, null);
         }
 
@@ -183,8 +193,7 @@ namespace AAEergasia3 {
             } else {
                 next = playing >= songsDataGridView.Rows.Count - 1 ? 0 : playing + 1;
             }
-            
-            songsDataGridView.Rows[repeat? playing : random ? rand[rind] : next].Selected = true;
+            songsDataGridView.Rows[repeat&&sender==null? playing : random ? rand[rind] : next].Selected = true;
             songsDataGridView_CellMouseDoubleClick(null, null);
         }
 
@@ -192,6 +201,16 @@ namespace AAEergasia3 {
             var ee = w.wplayer.playState;
             if (ee ==WMPPlayState.wmppsStopped) { nextBtn_Click(null, null); }
             if (ee == WMPPlayState.wmppsReady) { w.wplayer.controls.play(); }
+            if (ee == WMPPlayState.wmppsPlaying||ee==WMPPlayState.wmppsPaused) {
+                label2.Text = w.wplayer.controls.currentItem.durationString;
+                label1.Text = w.wplayer.controls.currentPositionString;
+                int v = (int)(songtb.Maximum * (w.wplayer.controls.currentPosition / w.wplayer.controls.currentItem.duration));
+                songtb.Value = v > songtb.Maximum ? songtb.Maximum : v;
+            } else {
+                label2.Text = "00:00";
+                label1.Text = "00:00";
+                songtb.Value = 0;
+            }
         }
 
         private void repeatBtn_Click(object sender, EventArgs e) {
@@ -212,9 +231,19 @@ namespace AAEergasia3 {
                 rand[j] = rand[i];
                 rand[i] = tmp;
             }
-            int c = Array.IndexOf(rand, playing); 
-            rand[c] = rand[0];
-            rand[0] = playing;
+            if (playing != -1) {
+                int c = Array.IndexOf(rand, playing);
+                rand[c] = rand[0];
+                rand[0] = playing;
+            }
+        }
+
+        private void songtb_Scroll(object sender, EventArgs e) {
+            w.wplayer.controls.currentPosition= (sender as TrackBar).Value*(( w.wplayer.controls.currentItem.duration/1000));
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e) {
+            m.Close();
         }
     }
 

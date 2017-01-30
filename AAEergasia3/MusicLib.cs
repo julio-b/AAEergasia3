@@ -17,19 +17,24 @@ namespace AAEergasia3 {
             }
             con = new SQLiteConnection("Data Source=" + filename + ";Version=3;");
             con.Open();
-            string sql = "CREATE TABLE IF NOT EXISTS music (filename TEXT, name TEXT, author TEXT, year INT, genre TEXT, language TEXT, score INT, UNIQUE(filename))";
+            string sql = "CREATE TABLE IF NOT EXISTS music (filename TEXT, song TEXT, artist TEXT, year INT, genre TEXT, language TEXT, score INT, UNIQUE(filename))";
             SQLiteCommand command = new SQLiteCommand(sql, con);
             command.ExecuteNonQuery();
         }
 
-        public void InsertNewFile(string filename, string name, string author, int year, string genre, string langueage="english", int score=0) {
-            string sql = "INSERT OR IGNORE INTO music (filename, name, author, year, genre, language, score) VALUES ("
+        public void InsertNewFile(string filename, string song, string artist, int year, string genre, string language = "English", int score=0) {
+            filename = filename.Replace("'", "''");
+            song = song.Replace("'", "''");
+            artist = artist.Replace("'", "''");
+            genre = genre.Replace("'", "''");
+            language = language.Replace("'", "''");
+            string sql = "INSERT OR IGNORE INTO music (filename, song, artist, year, genre, language, score) VALUES ("
                 + "'"    + filename
-                + "','"  + name
-                + "', '" + author
+                + "','"  + song
+                + "', '" + artist
                 + "',"   + year
                 + ",'"   + genre
-                + "','"  + langueage
+                + "','"  + language
                 + "',"   + score
                 + ")";
             SQLiteCommand command = new SQLiteCommand(sql, con);
@@ -37,17 +42,21 @@ namespace AAEergasia3 {
         }
 
         public void DeleteFile(string filename) {
+            filename = filename.Replace("'", "''");
             string sql = "DELETE FROM music WHERE filename = '" + filename + "'";
             SQLiteCommand command = new SQLiteCommand(sql, con);
             command.ExecuteNonQuery();
         }
 
         public void EditFileInfos(string filename, string column, string value) {
+            filename = filename.Replace("'", "''");
+            value = value.Replace("'", "''");
             string sql = "UPDATE music SET " + column + "= '" + value + "' WHERE filename = '" + filename + "'";
             SQLiteCommand command = new SQLiteCommand(sql, con);
             command.ExecuteNonQuery();
         }
         public void EditFileInfos(string filename, string column, int value) {
+            filename = filename.Replace("'", "''");
             string sql = "UPDATE music SET " + column + "= " + value + " WHERE filename = '" + filename + "'";
             SQLiteCommand command = new SQLiteCommand(sql, con);
             command.ExecuteNonQuery();
@@ -59,6 +68,9 @@ namespace AAEergasia3 {
             SQLiteDataReader reader = command.ExecuteReader();
             return reader;
         }
-        //!!close db connection on form exit
+
+        public void Close() {
+            con.Close();
+        }
     }
 }

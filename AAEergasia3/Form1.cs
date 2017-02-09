@@ -25,6 +25,7 @@ namespace AAEergasia3 {
         Font spoticon;
         int playing = -1;
         bool edit_mode = false;
+
         public Form1() {
             InitializeComponent();
             modernFont.AddFontFile("..\\..\\Externals\\spoticon.ttf");
@@ -37,34 +38,9 @@ namespace AAEergasia3 {
             playingSongLabel.Font = new Font(modernFont.Families[0], 11);
             playingAuthorLabel.Font = new Font(modernFont.Families[0], 9);
             
-            
             songsDataGridView.RowsDefaultCellStyle.Font = new Font(modernFont.Families[0], 12);
             songsDataGridView.ColumnHeadersDefaultCellStyle.Font = new Font(modernFont.Families[0], 10);
-            songsDataGridView.EnableHeadersVisualStyles = false;
-            songsDataGridView.ColumnCount = 9;
-            string[] tmp = { "#", "", "SONG", "ARTIST", "YEAR", "GENRE", "LANGUAGE", "SCORE", "filename"};
-            for(int i = 0; i<tmp.Length; i++) {
-                songsDataGridView.Columns[i].SortMode = DataGridViewColumnSortMode.Programmatic;
-                songsDataGridView.Columns[i].Name = tmp[i].ToString();
-            }
             
-            songsDataGridView.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            songsDataGridView.Columns[0].Width = 55;
-            songsDataGridView.Columns[0].ReadOnly = true;
-            songsDataGridView.Columns[1].DefaultCellStyle.Font = new Font(modernFont.Families[1], 18);
-            songsDataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            songsDataGridView.Columns[1].Width = 40;
-            songsDataGridView.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            songsDataGridView.Columns[1].Visible = false;
-            songsDataGridView.Columns[1].ReadOnly = true;
-            songsDataGridView.Columns[2].FillWeight = 180;
-            songsDataGridView.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            songsDataGridView.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            songsDataGridView.Columns[7].Width = 60;
-            songsDataGridView.Columns[7].ReadOnly = true;
-            songsDataGridView.Columns[8].Visible = false;//hide filename column
-            //m.InsertNewFile("..\\..\\test\\System  Of A Down - Sad Statue.mp3", "-", "-", 0, "-");
-
             refresh_dataGridView();
         }
 
@@ -76,9 +52,9 @@ namespace AAEergasia3 {
             songsDataGridView.Rows.Clear();
             SQLiteDataReader r = m.GetOrdered();
             while (r.Read()) {
-                songsDataGridView.Rows.Add(new object[] { r.StepCount, "\uf160", r["song"], r["artist"], r["year"], r["genre"], r["language"], r["score"], r["filename"]});
-                songsDataGridView.Rows[r.StepCount - 1].Cells[1].Style.Font = spoticon;
-                songsDataGridView.Rows[r.StepCount - 1].Cells[1].Style.SelectionForeColor = Color.DarkRed;
+                songsDataGridView.Rows.Add(new object[] { "\uf160", r.StepCount, r["song"], r["artist"], r["year"], r["genre"], r["language"], r["score"], r["filename"]});
+                songsDataGridView.Rows[r.StepCount - 1].Cells[0].Style.Font = spoticon;
+                songsDataGridView.Rows[r.StepCount - 1].Cells[0].Style.SelectionForeColor = Color.DarkRed;
             }
         }
 
@@ -127,12 +103,12 @@ namespace AAEergasia3 {
                 btn.ForeColor = Color.DarkRed;
             }
             edit_mode = !edit_mode;
-            songsDataGridView.Columns[1].Visible = edit_mode; //hide delete_btn column
+            songsDataGridView.Columns[0].Visible = edit_mode; //hide delete_btn column
         }
 
         private void songsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e) {
             if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
-            if (e.ColumnIndex == 1 &&///delete song
+            if (e.ColumnIndex == 0 &&///delete song
                 MessageBox.Show("Delete \"" + songsDataGridView.Rows[e.RowIndex].Cells[2].Value.ToString() + "\" ?",
                 "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
                 m.DeleteFile(songsDataGridView.Rows[e.RowIndex].Cells[8].Value.ToString());//delete from sqlite
@@ -145,7 +121,7 @@ namespace AAEergasia3 {
         private void songsDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e) {
             if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
             if (songsDataGridView[e.ColumnIndex, e.RowIndex].Value==null||songsDataGridView[e.ColumnIndex, e.RowIndex].Value.ToString() == "") { songsDataGridView.CancelEdit(); return; }
-            m.EditFileInfos(songsDataGridView[8,e.RowIndex].Value.ToString(), songsDataGridView.Columns[e.ColumnIndex].Name, songsDataGridView[e.ColumnIndex, e.RowIndex].Value.ToString());
+            m.EditFileInfos(songsDataGridView[8,e.RowIndex].Value.ToString(), songsDataGridView.Columns[e.ColumnIndex].HeaderText, songsDataGridView[e.ColumnIndex, e.RowIndex].Value.ToString());
         }
 
         private void songsDataGridView_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e) {
@@ -244,6 +220,15 @@ namespace AAEergasia3 {
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e) {
             m.Close();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string about = "Created by:\n";
+            about += "\tΓιώργος\n";
+            about += "\tΘεοφάνης\n";
+            about += "\tΤζούλιο\n";
+            MessageBox.Show(about, "About");
         }
     }
 

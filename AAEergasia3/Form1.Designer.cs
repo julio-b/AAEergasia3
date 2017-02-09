@@ -24,17 +24,25 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.songsDataGridView = new System.Windows.Forms.DataGridView();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.yooToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.playingSongLabel = new System.Windows.Forms.Label();
             this.playingAuthorLabel = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.editModeBtn = new System.Windows.Forms.Button();
             this.volumeBtn = new System.Windows.Forms.Button();
+            this.volumetb = new System.Windows.Forms.TrackBar();
+            this.editModeBtn = new System.Windows.Forms.Button();
             this.newSongBtn = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -48,21 +56,25 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.panel2 = new System.Windows.Forms.Panel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.volumetb = new System.Windows.Forms.TrackBar();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.yooToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.songsDataGridView)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.volumetb)).BeginInit();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.songtb)).BeginInit();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.volumetb)).BeginInit();
             this.SuspendLayout();
             // 
             // songsDataGridView
@@ -77,32 +89,43 @@
             this.songsDataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.songsDataGridView.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.songsDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(160)))));
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.songsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(160)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.songsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.songsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.songsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column2,
+            this.Column1,
+            this.Column3,
+            this.Column4,
+            this.Column5,
+            this.Column6,
+            this.Column7,
+            this.Column8,
+            this.Column9});
             this.songsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.songsDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.songsDataGridView.EnableHeadersVisualStyles = false;
             this.songsDataGridView.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.songsDataGridView.Location = new System.Drawing.Point(15, 15);
             this.songsDataGridView.MultiSelect = false;
             this.songsDataGridView.Name = "songsDataGridView";
             this.songsDataGridView.RowHeadersVisible = false;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.White;
-            this.songsDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
+            this.songsDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.songsDataGridView.RowTemplate.Height = 40;
             this.songsDataGridView.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.songsDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.songsDataGridView.Size = new System.Drawing.Size(871, 413);
+            this.songsDataGridView.Size = new System.Drawing.Size(869, 411);
             this.songsDataGridView.TabIndex = 6;
             this.songsDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.songsDataGridView_CellEndEdit);
             this.songsDataGridView.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.songsDataGridView_CellMouseDoubleClick);
@@ -114,19 +137,59 @@
             this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.aboutToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.helpToolStripMenuItem,
+            this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(951, 24);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.testToolStripMenuItem});
+            this.fileToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // testToolStripMenuItem
+            // 
+            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.testToolStripMenuItem.Text = "Add song";
+            this.testToolStripMenuItem.Click += new System.EventHandler(this.newSongBtn_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.yooToolStripMenuItem});
+            this.helpToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // yooToolStripMenuItem
+            // 
+            this.yooToolStripMenuItem.Name = "yooToolStripMenuItem";
+            this.yooToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.yooToolStripMenuItem.Text = "Yoo";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.panel5);
             this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.panel3);
@@ -172,25 +235,10 @@
             this.panel4.Controls.Add(this.volumetb);
             this.panel4.Controls.Add(this.editModeBtn);
             this.panel4.Controls.Add(this.newSongBtn);
-            this.panel4.Location = new System.Drawing.Point(794, 3);
+            this.panel4.Location = new System.Drawing.Point(792, 1);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(154, 73);
             this.panel4.TabIndex = 7;
-            // 
-            // editModeBtn
-            // 
-            this.editModeBtn.FlatAppearance.BorderSize = 0;
-            this.editModeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.editModeBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(160)))));
-            this.editModeBtn.Location = new System.Drawing.Point(116, 37);
-            this.editModeBtn.Name = "editModeBtn";
-            this.editModeBtn.Size = new System.Drawing.Size(30, 30);
-            this.editModeBtn.TabIndex = 4;
-            this.editModeBtn.Text = "";
-            this.editModeBtn.UseVisualStyleBackColor = true;
-            this.editModeBtn.Click += new System.EventHandler(this.editModeBtn_Click);
-            this.editModeBtn.MouseEnter += new System.EventHandler(this.controls_MouseEnter);
-            this.editModeBtn.MouseLeave += new System.EventHandler(this.controls_MouseLeave);
             // 
             // volumeBtn
             // 
@@ -202,10 +250,39 @@
             this.volumeBtn.Size = new System.Drawing.Size(30, 30);
             this.volumeBtn.TabIndex = 9;
             this.volumeBtn.Text = "";
+            this.toolTip1.SetToolTip(this.volumeBtn, "Mute");
             this.volumeBtn.UseVisualStyleBackColor = true;
             this.volumeBtn.Click += new System.EventHandler(this.volumeBtn_Click);
             this.volumeBtn.MouseEnter += new System.EventHandler(this.controls_MouseEnter);
             this.volumeBtn.MouseLeave += new System.EventHandler(this.controls_MouseLeave);
+            // 
+            // volumetb
+            // 
+            this.volumetb.AutoSize = false;
+            this.volumetb.Location = new System.Drawing.Point(33, 8);
+            this.volumetb.Maximum = 100;
+            this.volumetb.Name = "volumetb";
+            this.volumetb.Size = new System.Drawing.Size(124, 21);
+            this.volumetb.TabIndex = 10;
+            this.volumetb.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.volumetb.Value = 100;
+            this.volumetb.ValueChanged += new System.EventHandler(this.volumeCh);
+            // 
+            // editModeBtn
+            // 
+            this.editModeBtn.FlatAppearance.BorderSize = 0;
+            this.editModeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.editModeBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(160)))));
+            this.editModeBtn.Location = new System.Drawing.Point(116, 37);
+            this.editModeBtn.Name = "editModeBtn";
+            this.editModeBtn.Size = new System.Drawing.Size(30, 30);
+            this.editModeBtn.TabIndex = 4;
+            this.editModeBtn.Text = "";
+            this.toolTip1.SetToolTip(this.editModeBtn, "Edit playlist\'s songs.");
+            this.editModeBtn.UseVisualStyleBackColor = true;
+            this.editModeBtn.Click += new System.EventHandler(this.editModeBtn_Click);
+            this.editModeBtn.MouseEnter += new System.EventHandler(this.controls_MouseEnter);
+            this.editModeBtn.MouseLeave += new System.EventHandler(this.controls_MouseLeave);
             // 
             // newSongBtn
             // 
@@ -217,6 +294,7 @@
             this.newSongBtn.Size = new System.Drawing.Size(30, 30);
             this.newSongBtn.TabIndex = 2;
             this.newSongBtn.Text = "";
+            this.toolTip1.SetToolTip(this.newSongBtn, "Add new song to playlist.");
             this.newSongBtn.UseVisualStyleBackColor = true;
             this.newSongBtn.Click += new System.EventHandler(this.newSongBtn_Click);
             this.newSongBtn.MouseEnter += new System.EventHandler(this.controls_MouseEnter);
@@ -233,7 +311,7 @@
             this.panel3.Controls.Add(this.repeatBtn);
             this.panel3.Controls.Add(this.prevBtn);
             this.panel3.Controls.Add(this.randomBtn);
-            this.panel3.Location = new System.Drawing.Point(225, 0);
+            this.panel3.Location = new System.Drawing.Point(224, -1);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(500, 76);
             this.panel3.TabIndex = 7;
@@ -261,6 +339,7 @@
             // songtb
             // 
             this.songtb.AutoSize = false;
+            this.songtb.Cursor = System.Windows.Forms.Cursors.Hand;
             this.songtb.Location = new System.Drawing.Point(33, 58);
             this.songtb.Maximum = 1000;
             this.songtb.Name = "songtb";
@@ -279,6 +358,7 @@
             this.playBtn.Size = new System.Drawing.Size(71, 50);
             this.playBtn.TabIndex = 0;
             this.playBtn.Text = "";
+            this.toolTip1.SetToolTip(this.playBtn, "Play");
             this.playBtn.UseVisualStyleBackColor = true;
             this.playBtn.Click += new System.EventHandler(this.playBtn_Click);
             this.playBtn.MouseEnter += new System.EventHandler(this.controls_MouseEnter);
@@ -294,6 +374,7 @@
             this.nextBtn.Size = new System.Drawing.Size(60, 35);
             this.nextBtn.TabIndex = 5;
             this.nextBtn.Text = "";
+            this.toolTip1.SetToolTip(this.nextBtn, "Next");
             this.nextBtn.UseVisualStyleBackColor = true;
             this.nextBtn.Click += new System.EventHandler(this.nextBtn_Click);
             this.nextBtn.MouseEnter += new System.EventHandler(this.controls_MouseEnter);
@@ -309,6 +390,7 @@
             this.repeatBtn.Size = new System.Drawing.Size(60, 35);
             this.repeatBtn.TabIndex = 8;
             this.repeatBtn.Text = "";
+            this.toolTip1.SetToolTip(this.repeatBtn, "Repeat");
             this.repeatBtn.UseVisualStyleBackColor = true;
             this.repeatBtn.Click += new System.EventHandler(this.repeatBtn_Click);
             this.repeatBtn.MouseEnter += new System.EventHandler(this.controls_MouseEnter);
@@ -324,6 +406,7 @@
             this.prevBtn.Size = new System.Drawing.Size(60, 35);
             this.prevBtn.TabIndex = 6;
             this.prevBtn.Text = "";
+            this.toolTip1.SetToolTip(this.prevBtn, "Previous");
             this.prevBtn.UseVisualStyleBackColor = true;
             this.prevBtn.Click += new System.EventHandler(this.prevBtn_Click);
             this.prevBtn.MouseEnter += new System.EventHandler(this.controls_MouseEnter);
@@ -339,6 +422,7 @@
             this.randomBtn.Size = new System.Drawing.Size(60, 35);
             this.randomBtn.TabIndex = 7;
             this.randomBtn.Text = "";
+            this.toolTip1.SetToolTip(this.randomBtn, "Random");
             this.randomBtn.UseVisualStyleBackColor = true;
             this.randomBtn.Click += new System.EventHandler(this.randomBtn_Click);
             this.randomBtn.MouseEnter += new System.EventHandler(this.controls_MouseEnter);
@@ -347,7 +431,6 @@
             // openFileDialog1
             // 
             this.openFileDialog1.DefaultExt = "mp3";
-            this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "Music files|*.mp3;*.wav|All files|*.*";
             this.openFileDialog1.Multiselect = true;
             // 
@@ -357,6 +440,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.songsDataGridView);
             this.panel2.Location = new System.Drawing.Point(24, 52);
             this.panel2.Name = "panel2";
@@ -371,54 +455,69 @@
             this.timer1.Tag = "";
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // volumetb
+            // Column2
             // 
-            this.volumetb.AutoSize = false;
-            this.volumetb.Location = new System.Drawing.Point(33, 8);
-            this.volumetb.Maximum = 100;
-            this.volumetb.Name = "volumetb";
-            this.volumetb.Size = new System.Drawing.Size(124, 21);
-            this.volumetb.TabIndex = 10;
-            this.volumetb.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.volumetb.Value = 100;
-            this.volumetb.ValueChanged += new System.EventHandler(this.volumeCh);
+            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column2.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Column2.HeaderText = "";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Column2.Visible = false;
+            this.Column2.Width = 40;
             // 
-            // fileToolStripMenuItem
+            // Column1
             // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.testToolStripMenuItem});
-            this.fileToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "File";
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Column1.HeaderText = "#";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Column1.Width = 55;
             // 
-            // testToolStripMenuItem
+            // Column3
             // 
-            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.testToolStripMenuItem.Text = "test";
+            this.Column3.FillWeight = 180F;
+            this.Column3.HeaderText = "SONG";
+            this.Column3.Name = "Column3";
             // 
-            // aboutToolStripMenuItem
+            // Column4
             // 
-            this.aboutToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
-            this.aboutToolStripMenuItem.Text = "About";
+            this.Column4.HeaderText = "ARTIST";
+            this.Column4.Name = "Column4";
             // 
-            // helpToolStripMenuItem
+            // Column5
             // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.yooToolStripMenuItem});
-            this.helpToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
-            this.helpToolStripMenuItem.Text = "Help";
+            this.Column5.HeaderText = "YEAR";
+            this.Column5.Name = "Column5";
             // 
-            // yooToolStripMenuItem
+            // Column6
             // 
-            this.yooToolStripMenuItem.Name = "yooToolStripMenuItem";
-            this.yooToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.yooToolStripMenuItem.Text = "Yoo";
+            this.Column6.HeaderText = "GENRE";
+            this.Column6.Name = "Column6";
+            // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "LANGUAGE";
+            this.Column7.Name = "Column7";
+            // 
+            // Column8
+            // 
+            this.Column8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column8.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Column8.HeaderText = "SCORE";
+            this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
+            this.Column8.Width = 60;
+            // 
+            // Column9
+            // 
+            this.Column9.HeaderText = "filename";
+            this.Column9.Name = "Column9";
+            this.Column9.ReadOnly = true;
+            this.Column9.Visible = false;
             // 
             // Form1
             // 
@@ -432,7 +531,8 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(842, 624);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Spootify";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.songsDataGridView)).EndInit();
             this.menuStrip1.ResumeLayout(false);
@@ -440,10 +540,10 @@
             this.panel1.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.volumetb)).EndInit();
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.songtb)).EndInit();
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.volumetb)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -478,6 +578,16 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem yooToolStripMenuItem;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
     }
 }
 

@@ -215,7 +215,8 @@ namespace AAEergasia3 {
         }
 
         private void songtb_Scroll(object sender, EventArgs e) {
-            w.wplayer.controls.currentPosition= (sender as TrackBar).Value*(( w.wplayer.controls.currentItem.duration/1000));
+            if(w.wplayer.controls.currentItem != null)
+                w.wplayer.controls.currentPosition= (sender as TrackBar).Value*(( w.wplayer.controls.currentItem.duration/1000));
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e) {

@@ -23,7 +23,7 @@ namespace AAEergasia3 {
         bool random = false;
         int rind = 0;
         Font spoticon;
-        int playing = -1;
+        DataGridViewRow playing = null;
         bool edit_mode = false;
 
         public Form1() {
@@ -63,25 +63,27 @@ namespace AAEergasia3 {
             if (ind < 0) return;
             string songFile = songsDataGridView.Rows[ind].Cells[8].Value.ToString();    ///column # 8 = filename
             if (File.Exists(songFile)) {
-                if (playing != -1) {//reset previous song row colors
-                    songsDataGridView.Rows[playing].DefaultCellStyle.ForeColor = Color.White;
-                    songsDataGridView.Rows[playing].DefaultCellStyle.SelectionForeColor = Color.White;
-                    songsDataGridView.Rows[playing].DefaultCellStyle.BackColor = Color.FromArgb(24, 24, 24);
+                if (playing != null) {//reset previous song row colors
+                    playing.DefaultCellStyle.ForeColor = Color.White;
+                    playing.DefaultCellStyle.SelectionForeColor = Color.White;
+                    playing.DefaultCellStyle.BackColor = Color.FromArgb(24, 24, 24);
                 }
                 //play new song
-                playing = ind;
+                playing = songsDataGridView.Rows[ind];
                 playingSongLabel.Text = songsDataGridView[2, ind].Value.ToString();
                 playingAuthorLabel.Text = songsDataGridView[3, ind].Value.ToString();
                 w.playSong(songFile);
-                songsDataGridView.Rows[playing].DefaultCellStyle.ForeColor = Color.FromArgb(29, 185, 84);
-                songsDataGridView.Rows[playing].DefaultCellStyle.SelectionForeColor = Color.FromArgb(29, 185, 84);
-                songsDataGridView.Rows[playing].DefaultCellStyle.BackColor = Color.FromArgb(51, 51, 51);
+                playing.DefaultCellStyle.ForeColor = Color.FromArgb(29, 185, 84);
+                playing.DefaultCellStyle.SelectionForeColor = Color.FromArgb(29, 185, 84);
+                playing.DefaultCellStyle.BackColor = Color.FromArgb(51, 51, 51);
                 playBtn.Text = "\uf130";
-                int tt = Int32.Parse(songsDataGridView[7, ind].Value.ToString()) + 1; 
+                int tt = Int32.Parse(songsDataGridView[7, ind].Value.ToString()) + 1;
                 m.EditFileInfos(songsDataGridView[8, ind].Value.ToString(), "score", tt);
                 songsDataGridView[7, ind].Value = tt;
-            } else playingSongLabel.Text = "File not found";
-
+            } else {
+                playingSongLabel.Text = "File not found";
+                playingAuthorLabel.Text = "";
+            }
         }
 
         private void newSongBtn_Click(object sender, EventArgs e) {
@@ -113,6 +115,8 @@ namespace AAEergasia3 {
                 "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
                 m.DeleteFile(songsDataGridView.Rows[e.RowIndex].Cells[8].Value.ToString());//delete from sqlite
                 songsDataGridView.Rows.Remove(songsDataGridView.Rows[e.RowIndex]);//delete from datagridview
+                randomBtn_Click(null, null);
+                randomBtn_Click(null, null);
             } else {//edit cell
                 songsDataGridView.BeginEdit(true);
             }
@@ -130,7 +134,7 @@ namespace AAEergasia3 {
         }
 
         private void playBtn_Click(object sender, EventArgs e) {
-            if (playing == -1) { songsDataGridView_CellMouseDoubleClick(null, null); return; }
+            if (playing==null) { songsDataGridView_CellMouseDoubleClick(null, null); return; }
             (sender as Button).Text = w.toggle();
         }
         private void controls_MouseEnter(object sender, EventArgs e) {
@@ -153,6 +157,7 @@ namespace AAEergasia3 {
 
         private void prevBtn_Click(object sender, EventArgs e) {
             int prev=0;
+            int playing = this.playing.Index;
             if (random) {
                 rind = rind <= 0 ? songsDataGridView.RowCount-1 : rind - 1;
             } else {
@@ -164,6 +169,7 @@ namespace AAEergasia3 {
 
         private void nextBtn_Click(object sender, EventArgs e) {
             int next=0;
+            int playing = this.playing.Index;
             if (random) {
                 rind = rind >= songsDataGridView.RowCount - 1 ? 0 : rind + 1;
             } else {
@@ -196,7 +202,7 @@ namespace AAEergasia3 {
 
         private void randomBtn_Click(object sender, EventArgs e) {
             random = !random;
-            (sender as Button).ForeColor = random ? Color.FromArgb(29, 185, 84) : Color.FromArgb(160, 160, 160);
+            randomBtn.ForeColor = random ? Color.FromArgb(29, 185, 84) : Color.FromArgb(160, 160, 160);
             Random r = new Random();
             rand = new int[songsDataGridView.RowCount];
             rind = 0;
@@ -207,10 +213,10 @@ namespace AAEergasia3 {
                 rand[j] = rand[i];
                 rand[i] = tmp;
             }
-            if (playing != -1) {
-                int c = Array.IndexOf(rand, playing);
+            if (r!=null) {
+                int c = Array.IndexOf(rand, playing.Index);
                 rand[c] = rand[0];
-                rand[0] = playing;
+                rand[0] = playing.Index;
             }
         }
 

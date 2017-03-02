@@ -113,10 +113,13 @@ namespace AAEergasia3 {
             if (e.ColumnIndex == 0 &&///delete song
                 MessageBox.Show("Delete \"" + songsDataGridView.Rows[e.RowIndex].Cells[2].Value.ToString() + "\" ?",
                 "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+                if (e.RowIndex == playing.Index)
+                {
+                    w.pauseSong();
+                    nextBtn_Click(null, null);//go to next song
+                }
                 m.DeleteFile(songsDataGridView.Rows[e.RowIndex].Cells[8].Value.ToString());//delete from sqlite
                 songsDataGridView.Rows.Remove(songsDataGridView.Rows[e.RowIndex]);//delete from datagridview
-                randomBtn_Click(null, null);
-                randomBtn_Click(null, null);
             } else {//edit cell
                 songsDataGridView.BeginEdit(true);
             }
